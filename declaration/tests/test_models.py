@@ -75,3 +75,13 @@ class TestModels(object):
 
         example = Example()
         assert example["missing"] is None
+
+    def test_initialize_with_field_data(self):
+        class Example(models.DeclarativeBase):
+            field1 = fields.StringField()
+            field2 = fields.StringField()
+
+        example = Example(field1="something", field2="else", field3="invalid")
+        assert example.field1 == "something"
+        assert example.field2 == "else"
+        assert example.field3 is None

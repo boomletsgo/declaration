@@ -32,6 +32,11 @@ class DeclarativeMeta(type):
 @six.add_metaclass(DeclarativeMeta)
 class DeclarativeBase(dict):
 
+    def __init__(self, *args, **kwargs):
+        for key, value in six.iteritems(kwargs):
+            if key in self._fields:
+                setattr(self, key, kwargs[key])
+
     def __iter__(self):
         # Only iterate through the declarative fields, since we inherit dict
         for key, field in six.iteritems(self._fields):
