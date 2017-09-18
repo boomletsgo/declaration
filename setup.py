@@ -21,7 +21,7 @@ setup(
     author='Jordan Ambra',
     author_email='jordan@serenitysoftware.io',
     url='https://github.com/boomletsgo/declaration',
-    version='0.1.2',
+    version='0.1.3',
     classifiers=classifiers,
     description='Base classes and fields for declarative programming, like Django ORM',
     keywords='declarative declaration metaclass',

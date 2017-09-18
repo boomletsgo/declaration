@@ -29,10 +29,11 @@ class GenericField(DeclarativeField):
 class UUIDField(GenericField):
 
     def parse(self, value):
-        try:
-            value = uuid.UUID(value, version=4)
-        except ValueError:
-            pass
+        if not isinstance(value, uuid.UUID):
+            try:
+                value = uuid.UUID(value, version=4)
+            except ValueError:
+                pass
 
         return value
 

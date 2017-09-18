@@ -68,6 +68,12 @@ class TestFields(object):
 
         assert converted == field.parse(value)
 
+    def test_uuid_field_passes_through_if_already_uuid(self):
+        field = fields.UUIDField()
+        value = uuid.UUID("c3864285-1f1e-4c0c-bd95-ad5a8dbf3232", version=4)
+
+        assert value == field.parse(value)
+
     def test_uuid_field_fails_if_not_uuid(self):
         field = fields.UUIDField()
         value = "garbage"
