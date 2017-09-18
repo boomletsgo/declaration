@@ -58,7 +58,7 @@ class TestModels(object):
         example.timestamp = datetime.datetime(2010, 1, 1, 12, 0, 0)
 
         output = json.dumps(example)
-        assert output == '{"timestamp": "2010-01-01T12:00:00"}'
+        assert output == '{"timestamp": "2010-01-01T12:00:00Z"}'
 
     def test_get_attribute_stores_raw_value(self):
         class Example(models.DeclarativeBase):
