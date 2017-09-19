@@ -11,8 +11,8 @@ class TestModels(object):
             title = fields.StringField()
 
         example = Example()
-        assert "title" in example._fields
-        assert 1 == len(example._fields)
+        assert "title" in example.fields
+        assert 1 == len(example.fields)
 
     def test_excludes_excess_fields(self):
         class Example(models.DeclarativeBase):
@@ -21,9 +21,9 @@ class TestModels(object):
         example = Example()
         example["something"] = "else"
 
-        assert "only" in example._fields
-        assert "something" not in example._fields
-        assert 1 == len(example._fields)
+        assert "only" in example.fields
+        assert "something" not in example.fields
+        assert 1 == len(example.fields)
 
     def test_get_raw_value_during_attribute_access(self):
         class Example(models.DeclarativeBase):
@@ -85,3 +85,11 @@ class TestModels(object):
         assert example.field1 == "something"
         assert example.field2 == "else"
         assert example.field3 is None
+
+    def test_can_get_data(self):
+        class Example(models.DeclarativeBase):
+            anything = fields.StringField()
+
+        example = Example(anything="goes")
+
+        assert example.data == {"anything": "goes"}

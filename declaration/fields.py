@@ -7,9 +7,6 @@ import six
 
 class DeclarativeField(object):
 
-    def __init__(self):
-        self.value = None
-
     def parse(self, value):
         raise NotImplementedError
 
