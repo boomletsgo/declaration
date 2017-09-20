@@ -54,7 +54,7 @@ class StringField(GenericField):
 class JSONField(GenericField):
 
     def parse(self, value):
-        if value:
+        if value and isinstance(value, six.string_types):
             return json.loads(value)
 
         return value
