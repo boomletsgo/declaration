@@ -31,6 +31,12 @@ class TestFields(object):
         assert "123" == field.parse(123)
         assert "123" == field.encode(123)
 
+    def test_json_field_converts(self):
+        field = fields.JSONField()
+
+        assert {"value": "here"} == field.parse('{"value": "here"}')
+        assert '{"value": "here"}' == field.encode({"value": "here"})
+
     def test_date_time_field_creates_proper_format(self):
         field = fields.DateTimeField()
 

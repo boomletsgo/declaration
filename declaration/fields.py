@@ -1,4 +1,5 @@
 import datetime
+import json
 import uuid
 
 from dateutil import parser
@@ -48,6 +49,21 @@ class StringField(GenericField):
 
     def encode(self, value):
         return str(value)
+
+
+class JSONField(GenericField):
+
+    def parse(self, value):
+        if value:
+            return json.loads(value)
+
+        return value
+
+    def encode(self, value):
+        if value:
+            return json.dumps(value)
+
+        return value
 
 
 class DateTimeField(GenericField):
