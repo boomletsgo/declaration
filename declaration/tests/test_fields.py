@@ -36,6 +36,8 @@ class TestFields(object):
 
         assert {"value": "here"} == field.parse('{"value": "here"}')
         assert '{"value": "here"}' == field.encode({"value": "here"})
+        assert None is field.parse(None)
+        assert None is field.encode(None)
 
     def test_date_time_field_creates_proper_format(self):
         field = fields.DateTimeField()
