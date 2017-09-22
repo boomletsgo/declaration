@@ -69,6 +69,25 @@ class TestFields(object):
         date_value = datetime.datetime(2013, 7, 31, 1, 33, 10)
         assert date_value.time() == field.parse(date_value)
 
+    def test_date_time_fields_ignore_missing_values(self):
+        field = fields.DateTimeField()
+        assert field.parse("") == ""
+        assert field.parse(None) is None
+        assert field.encode("") == ""
+        assert field.encode(None) is None
+
+        field = fields.DateField()
+        assert field.parse("") == ""
+        assert field.parse(None) is None
+        assert field.encode("") == ""
+        assert field.encode(None) is None
+
+        field = fields.TimeField()
+        assert field.parse("") == ""
+        assert field.parse(None) is None
+        assert field.encode("") == ""
+        assert field.encode(None) is None
+
     def test_uuid_field_converts(self):
         field = fields.UUIDField()
         value = "c3864285-1f1e-4c0c-bd95-ad5a8dbf3232"

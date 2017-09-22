@@ -69,18 +69,27 @@ class JSONField(GenericField):
 class DateTimeField(GenericField):
 
     def parse(self, value):
+        if not value:
+            return value
+
         if not isinstance(value, datetime.datetime):
             value = parser.parse(value)
 
         return value
 
     def encode(self, value):
+        if not value:
+            return value
+
         return value.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 class DateField(DateTimeField):
 
     def parse(self, value):
+        if not value:
+            return value
+
         if isinstance(value, six.string_types):
             value = parser.parse(value)
 
@@ -93,6 +102,9 @@ class DateField(DateTimeField):
 class TimeField(DateTimeField):
 
     def parse(self, value):
+        if not value:
+            return value
+
         if isinstance(value, datetime.datetime):
             value = value.time()
 
