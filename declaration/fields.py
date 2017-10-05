@@ -24,6 +24,16 @@ class GenericField(DeclarativeField):
         return value
 
 
+class NestedField(GenericField):
+
+    def __init__(self, model):
+        super(NestedField, self).__init__()
+        self.model = model
+
+    def parse(self, value):
+        return self.model(**value)
+
+
 class UUIDField(GenericField):
 
     def parse(self, value):

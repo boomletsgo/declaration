@@ -41,6 +41,7 @@ json.dumps(me)
 
 * DeclarativeField - Base field type. Make your own types by inheriting from this.
 * GenericField - Passes values through with no parsing or encoding.
+* NestedField - Allows you to set a DeclarativeBase as a field, effectively allowing nesting.
 * StringField - Sends and receives strings. Coerces to string if necessary.
 * UUIDField - Sends and receives UUIDs and UUID v4-formatted strings.
 * DateTimeField - Sends and receives datetime objects. Parses using python-dateutil.

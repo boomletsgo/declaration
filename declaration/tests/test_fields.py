@@ -3,7 +3,7 @@ import uuid
 
 import pytest
 
-from declaration import fields
+from declaration import fields, models
 
 
 class TestFields(object):
@@ -114,3 +114,21 @@ class TestFields(object):
         converted = uuid.UUID(value, version=4)
 
         assert value == field.encode(converted)
+
+    def test_nested_field_parses(self):
+        class NestedExample(models.DeclarativeBase):
+            subtitle = fields.StringField()
+
+        class Example(models.DeclarativeBase):
+            title = fields.StringField()
+            inner = fields.NestedField(NestedExample)
+
+        nested = NestedExample()
+        nested.subtitle = "Inner Text"
+
+        example = Example()
+        example.title = "Outer Text"
+        example.inner = nested
+
+        assert example.inner == nested
+        assert example.inner.subtitle == "Inner Text"
